@@ -60,8 +60,8 @@ photo_suffix      String     可以为空    头像后缀
 real_name         String     可以为空    人工维护真实姓名（样例数据为空）
 recent_list       String     可以为空    最近列表
 send_state        String     可以为空    发送状态
-send              String     可以为空    情感正负面
-send_num          String     可以为空    情感度
+sent              String     可以为空    情感正负面
+sent_num          String     可以为空    情感度
 todo              String     可以为空    计划内容
 top_tips          String     可以为空    top评论
 visibility        String     可以为空    可见性
@@ -133,8 +133,8 @@ friends           String     可以为空    朋友数量
     "real_name":"",         #人工维护真实姓名（样例数据为空）
     "recent_list":"",       #最近列表
     "send_state":"",        #发送状态
-    "send":"",              #情感正负面
-    "send_num":"",          #情感度
+    "sent":"",              #情感正负面
+    "sent_num":"",          #情感度
     "todo":"",              #计划内容
     "top_tips":"",          #top评论
     "visibility":"",        #可见性

@@ -83,7 +83,7 @@ sent_num       String     可以为空       情感度 --算法预留
     "external_url":"",   #社交联系方式，例如fb账号地址
     "fetch_day":"",      #更新日期
     "profile_pic_url_oss":"",   #头像oss地址
-    "media_url":"",             #²文章含有媒介时，多个之间用’|’隔开。比如：www.sina.com/1.png | www.baidu.cn/2.doc media_url 与 media_type 一一对应
+    "media_url":"",             #²文章含有媒介URL时，多个之间用’|’隔开。比如：www.sina.com/1.png | www.baidu.cn/2.doc media_url 与 media_type 一一对应
     "person":"",         #人物标签 --算法预留
     "sent_num":"",       #情感度 --算法预留
 }

@@ -49,7 +49,6 @@ confirmed_locations_post    String 可以为空       办公所在邮编
 confirmed_locations_address   String    可以为空  办公所在地址
 size            String    可以为空        企业规模
 founded_on      String    可以为空        成立于
-description     String    可以为空        企业描述（简介）
 website         String    可以为空        企业官网
 employees       String    可以为空        员工数量
 keywords        String    可以为空        关键词
@@ -113,7 +112,6 @@ media_title           String     可以为空        ²  文章含有媒介时�
     "confirmed_locations_address":"", #办公所在地址
     "size":"",                        #企业规模
     "founded_on":"",                  #成立于
-    "description":"",                 #企业描述（简介）
     "website":"",                     #企业官网
     "employees":"",                   #员工数量
     "keywords":"",                    #关键词

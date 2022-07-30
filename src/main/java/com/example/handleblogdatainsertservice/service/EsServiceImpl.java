@@ -1,10 +1,12 @@
 package com.example.handleblogdatainsertservice.service;
 
+import cn.hutool.db.DaoTemplate;
 import com.example.handleblogdatainsertservice.constants.RedisKeyConstants;
 import com.example.handleblogdatainsertservice.domain.*;
 import com.example.handleblogdatainsertservice.enums.MediaSourceEnum;
 import com.example.handleblogdatainsertservice.repository.*;
 import com.example.handleblogdatainsertservice.util.ReaderFileUtil;
+import com.example.handleblogdatainsertservice.vo.SendEmailReq;
 import com.google.common.collect.Lists;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
@@ -35,6 +37,8 @@ public class EsServiceImpl {
     private LinkBusinessV2Repository linkBusinessV2Repository;
     @Resource
     private RedisServiceImpl redisService;
+    @Resource
+    private SendEmailServiceImpl sendEmailService;
 
     /**
      *
@@ -179,6 +183,13 @@ public class EsServiceImpl {
             return true;
         }catch (Exception e) {
             log.error("EsServiceImpl.insertEsData has error:{}",e.getMessage());
+
+            SendEmailReq sendEmailReq = SendEmailReq
+                    .builder()
+                    .subject(mediaSourceEnum.getEs_index_v2()+"类型入ES异常")
+                    .content("报错信息:" + e.getMessage())
+                    .build();
+            sendEmailService.sendSimpleEmail(sendEmailReq);
         }
         return false;
     }
