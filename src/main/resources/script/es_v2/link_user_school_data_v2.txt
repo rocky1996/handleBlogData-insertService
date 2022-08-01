@@ -54,6 +54,7 @@ employees       String    可以为空        员工数量
 keywords        String    可以为空        关键词
 tags            String    可以为空        标签
 profile_score   String    可以为空        信息完成度
+source          String     可以为空        资源类别
 source_connection          String    可以为空        资料来源
 person          String     可以为空    人物
 media_type_embeded    String     可以为空        媒介类型 ‘P’:  图片； ‘M’:  音频； ‘V’:  视频； ‘X’:  附件(文章) ²文章含有媒介时，多个之间用’|’隔开。比如：P|P|V|X media_type 与 media_url 一一对应
@@ -117,6 +118,7 @@ media_title           String     可以为空        ²  文章含有媒介时�
     "keywords":"",                    #关键词
     "tags":"",                        #标签
     "profile_score":"",               #信息完成度
+    "source"                          #资源类别
     "source_connection":"",           #资料来源
     "person":"",                      #人物
     "media_type_embeded":"",          #媒介类型 ‘P’:  图片； ‘M’:  音频； ‘V’:  视频； ‘X’:  附件(文章) ²文章含有媒介时，多个之间用’|’隔开。比如：P|P|V|X media_type 与 media_url 一一对应

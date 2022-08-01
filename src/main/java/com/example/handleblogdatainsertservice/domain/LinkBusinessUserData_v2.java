@@ -59,6 +59,7 @@ import org.springframework.data.elasticsearch.annotations.Document;
  * keywords        String    可以为空        关键词
  * tags            String    可以为空        标签
  * timestamp       String    可以为空        时间戳
+ * source          String    可以为空        资源类别
  * source_connection          String    可以为空        资料来源
  * person          String     可以为空    人物
  * media_type_embeded    String     可以为空        媒介类型 ‘P’:  图片； ‘M’:  音频； ‘V’:  视频； ‘X’:  附件(文章) ²文章含有媒介时，多个之间用’|’隔开。比如：P|P|V|X media_type 与 media_url 一一对应
@@ -122,6 +123,7 @@ import org.springframework.data.elasticsearch.annotations.Document;
  *     "keywords":"",                    #关键词
  *     "tags":"",                        #标签
  *     "timestamp":"",                   #时间戳
+ *     "source"                          #资源类别
  *     "source_connection":"",           #资料来源
  *     "person":"",                      #人物
  *     "media_type_embeded":"",          #媒介类型 ‘P’:  图片； ‘M’:  音频； ‘V’:  视频； ‘X’:  附件(文章) ²文章含有媒介时，多个之间用’|’隔开。比如：P|P|V|X media_type 与 media_url 一一对应
@@ -410,6 +412,11 @@ public class LinkBusinessUserData_v2 {
     private String timestamp;
 
     /**
+     * 资源类别
+     */
+    private String source;
+
+    /**
      * 资料来源
      */
     private String source_connection;
@@ -447,7 +454,7 @@ public class LinkBusinessUserData_v2 {
 
     public LinkBusinessUserData_v2() {}
 
-    public LinkBusinessUserData_v2(String uuid, String platform, String data_source, String create_time, String importance, String remark, String language_type, String source_id, String user_id, String screen_name, String use_name, String user_url, String user_avatar, String local_photo_url, String gender, String country, String city, String user_type, String verified, String followers_count, String friend_count, String post_count, String like_count, String source_create_time, String mobile, String email, String name_userd_before, String language, String user_religion, String works, String location, String marriage, String home_town, String user_summary, String cover, String local_cover, String staffing_company, String industries, String specialities, String headquarter_post, String headquarter_address, String confirmed_locations_contry, String confirmed_locations_city, String confirmed_locations_post, String confirmed_locations_address, String size, String founded_on, String website, String employees, String keywords, String tags, String timestamp, String source_connection, String person, String media_type_embeded, String media_url, String media_url_name, String media_title, Integer integrity) {
+    public LinkBusinessUserData_v2(String uuid, String platform, String data_source, String create_time, String importance, String remark, String language_type, String source_id, String user_id, String screen_name, String use_name, String user_url, String user_avatar, String local_photo_url, String gender, String country, String city, String user_type, String verified, String followers_count, String friend_count, String post_count, String like_count, String source_create_time, String mobile, String email, String name_userd_before, String language, String user_religion, String works, String location, String marriage, String home_town, String user_summary, String cover, String local_cover, String staffing_company, String industries, String specialities, String headquarter_post, String headquarter_address, String confirmed_locations_contry, String confirmed_locations_city, String confirmed_locations_post, String confirmed_locations_address, String size, String founded_on, String website, String employees, String keywords, String tags, String timestamp, String source, String source_connection, String person, String media_type_embeded, String media_url, String media_url_name, String media_title, Integer integrity) {
         this.uuid = uuid;
         this.platform = platform;
         this.data_source = data_source;
@@ -500,6 +507,7 @@ public class LinkBusinessUserData_v2 {
         this.keywords = keywords;
         this.tags = tags;
         this.timestamp = timestamp;
+        this.source = source;
         this.source_connection = source_connection;
         this.person = person;
         this.media_type_embeded = media_type_embeded;
