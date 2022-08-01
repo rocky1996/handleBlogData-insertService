@@ -175,7 +175,7 @@ public class TwitterUserData_v2{
     private String use_name;
 
     /**
-     * 博主url（若为空需要拼接，格式如下：https://www.facebook.com/profile.php?id=100068526609915)
+     * 博主url（若为空需要拼接，格式如下：https://www.facebook.com/profile.php?id=10f0068526609915)
      */
     private String user_url;
 
