@@ -45,7 +45,6 @@ import org.springframework.data.elasticsearch.annotations.Document;
  * born_time      String     可以为空       出生日期（数据部分为空）
  * registered_time       String     可以为空       注册时间（示例数据：2019-07-30 01:39:26）
  * bkgd_url       String     可以为空       背景图片url（示例：https://pbs.twimg.com/profile_banners/1156016417075937281/1564470068）
- * user_flag      String     可以为空       用户描述（示例：wife, mother, avid gardener.）
  * listed         String     可以为空       所属公共列表数（数字）
  * moments        String     可以为空       瞬间（数字）
  * protected      String     可以为空       是否是锁定账号（1：锁定，0：非锁定）
@@ -97,7 +96,6 @@ import org.springframework.data.elasticsearch.annotations.Document;
  *     "born_time":"",           #出生日期（数据部分为空）    ->      born_time或者birth_date
  *     "registered_time":"",     #注册时间（示例数据：2019-07-30 01:39:26）
  *     "bkgd_url":"",            #背景图片url（示例：https://pbs.twimg.com/profile_banners/1156016417075937281/1564470068）
- *     "user_flag":"",           #用户描述（示例：wife, mother, avid gardener.）   ->    user_flag或者user_info
  *     "listed":"",              #所属公共列表数（数字）   ->    listed或者collect_cnt
  *     "moments":"",             #瞬间（数字）
  *     "protected":"",           #是否是锁定账号（1：锁定，0：非锁定）
@@ -314,10 +312,10 @@ public class TwitterUserData_v2{
      */
     private String bkgd_url;
 
-    /**
-     * 用户描述（示例：wife, mother, avid gardener.）   ->    user_flag或者user_info
-     */
-    private String user_flag;
+//    /**
+//     * 用户描述（示例：wife, mother, avid gardener.）   ->    user_flag或者user_info
+//     */
+//    private String user_flag;
 
     /**
      * 所属公共列表数（数字）   ->    listed或者collect_cnt
@@ -367,7 +365,7 @@ public class TwitterUserData_v2{
 
     public TwitterUserData_v2() {}
 
-    public TwitterUserData_v2(String uuid, String platform, String data_source, String create_time, String importance, String remark, String language_type, String source_id, String user_id, String screen_name, String use_name, String user_url, String user_avatar, String local_photo_url, String gender, String country, String city, String user_type, String verified, String followers_count, String friend_count, String post_count, String like_count, String source_create_time, String mobile, String user_religion, String works, String location, String marriage, String home_town, String email, String name_userd_before, String user_summary, String language, String user_web_url, String born_time, String registered_time, String bkgd_url, String user_flag, String listed, String moments, String protect_ed, String tf_effective, String time_zone, String com_from, String diff_time, String extend, Integer integrity) {
+    public TwitterUserData_v2(String uuid, String platform, String data_source, String create_time, String importance, String remark, String language_type, String source_id, String user_id, String screen_name, String use_name, String user_url, String user_avatar, String local_photo_url, String gender, String country, String city, String user_type, String verified, String followers_count, String friend_count, String post_count, String like_count, String source_create_time, String mobile, String user_religion, String works, String location, String marriage, String home_town, String email, String name_userd_before, String user_summary, String language, String user_web_url, String born_time, String registered_time, String bkgd_url, String listed, String moments, String protect_ed, String tf_effective, String time_zone, String com_from, String diff_time, String extend, Integer integrity) {
         this.uuid = uuid;
         this.platform = platform;
         this.data_source = data_source;
@@ -406,7 +404,6 @@ public class TwitterUserData_v2{
         this.born_time = born_time;
         this.registered_time = registered_time;
         this.bkgd_url = bkgd_url;
-        this.user_flag = user_flag;
         this.listed = listed;
         this.moments = moments;
         this.protect_ed = protect_ed;
