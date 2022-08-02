@@ -47,6 +47,8 @@ import org.springframework.data.elasticsearch.annotations.Document;
  * media_url             String   可以为空      ²文章含有媒介时，多个之间用’|’隔开。比如：www.sina.com/1.png | www.baidu.cn/2.doc media_url 与 media_type 一一对应
  * person         String     可以为空       人物标签 --算法预留
  * sent_num       String     可以为空       情感度 --算法预留
+ * original_mailbox         String  可以为空          原始邮箱
+ * original_contact         String  可以为空          原始联系方式
  *
  * 入参格式:
  * {
@@ -91,6 +93,8 @@ import org.springframework.data.elasticsearch.annotations.Document;
  *     "media_url":"",             #²文章含有媒介时，多个之间用’|’隔开。比如：www.sina.com/1.png | www.baidu.cn/2.doc media_url 与 media_type 一一对应
  *     "person":"",         #人物标签 --算法预留
  *     "sent_num":"",       #情感度 --算法预留
+ *     "original_mailbox"      #原始邮箱
+ *     "original_contact"      #原始联系方式
  * }
  */
 @Data
@@ -313,9 +317,19 @@ public class InstagramUserData_v2 {
 //    @Field(type = FieldType.Text, analyzer = "ik_max_word", searchAnalyzer = "ik_max_word")
     private Integer integrity;
 
+    /**
+     * 原始邮箱
+     */
+    private String original_mailbox;
+
+    /**
+     * 原始联系方式
+     */
+    private String original_contact;
+
     public InstagramUserData_v2() {}
 
-    public InstagramUserData_v2(String uuid, String platform, String data_source, String create_time, String importance, String remark, String language_type, String source_id, String user_id, String screen_name, String use_name, String user_url, String user_avatar, String local_photo_url, String gender, String country, String city, String user_type, String verified, String followers_count, String friend_count, String post_count, String like_count, String source_create_time, String mobile, String email, String name_userd_before, String language, String user_religion, String works, String location, String marriage, String home_town, String user_summary, String external_url, String fetch_day, String profile_pic_url_oss, String media_url, String person, String sent_num, Integer integrity) {
+    public InstagramUserData_v2(String uuid, String platform, String data_source, String create_time, String importance, String remark, String language_type, String source_id, String user_id, String screen_name, String use_name, String user_url, String user_avatar, String local_photo_url, String gender, String country, String city, String user_type, String verified, String followers_count, String friend_count, String post_count, String like_count, String source_create_time, String mobile, String email, String name_userd_before, String language, String user_religion, String works, String location, String marriage, String home_town, String user_summary, String external_url, String fetch_day, String profile_pic_url_oss, String media_url, String person, String sent_num, Integer integrity, String original_mailbox, String original_contact) {
         this.uuid = uuid;
         this.platform = platform;
         this.data_source = data_source;
@@ -357,6 +371,8 @@ public class InstagramUserData_v2 {
         this.person = person;
         this.sent_num = sent_num;
         this.integrity = integrity;
+        this.original_mailbox = original_mailbox;
+        this.original_contact = original_contact;
     }
 }
 

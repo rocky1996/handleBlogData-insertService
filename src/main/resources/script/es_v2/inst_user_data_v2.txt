@@ -42,6 +42,8 @@ profile_pic_url_oss   String   可以为空      头像oss地址
 media_url             String   可以为空      ²文章含有媒介时，多个之间用’|’隔开。比如：www.sina.com/1.png | www.baidu.cn/2.doc media_url 与 media_type 一一对应
 person         String     可以为空       人物标签 --算法预留
 sent_num       String     可以为空       情感度 --算法预留
+original_mailbox         String  可以为空          原始邮箱
+original_contact         String  可以为空          原始联系方式
 
 入参格式:
 {
@@ -86,4 +88,6 @@ sent_num       String     可以为空       情感度 --算法预留
     "media_url":"",             #²文章含有媒介URL时，多个之间用’|’隔开。比如：www.sina.com/1.png | www.baidu.cn/2.doc media_url 与 media_type 一一对应
     "person":"",         #人物标签 --算法预留
     "sent_num":"",       #情感度 --算法预留
+    "original_mailbox"      #原始邮箱
+    "original_contact"      #原始联系方式
 }

@@ -71,6 +71,8 @@ source_key        String     可以为空    关键词来源
 source_venue      String     可以为空    位置来源
 source_venue_id   String     可以为空    位置id来源
 friends           String     可以为空    朋友数量
+original_mailbox         String  可以为空          原始邮箱
+original_contact         String  可以为空          原始联系方式
 
 入参格式:
 {
@@ -144,4 +146,6 @@ friends           String     可以为空    朋友数量
     "source_venue":"",      #位置来源
     "source_venue_id":"",   #位置id来源
     "friends":"",           #朋友数量
+    "original_mailbox"      #原始邮箱
+    "original_contact"      #原始联系方式
 }

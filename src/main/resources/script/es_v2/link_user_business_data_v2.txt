@@ -60,7 +60,8 @@ media_type_embeded    String     可以为空        媒介类型 ‘P’:  图�
 media_url             String     可以为空        ²文章含有媒介时，多个之间用’|’隔开。
 media_url_name        String     可以为空        本地媒体url， 多个用“|”分割
 media_title           String     可以为空        ²  文章含有媒介时，多个之间用’|’隔开。比如：头像|banner|位置图集1|…|位置图集60|发帖图集1|…|发帖图集20|评论图1
-
+original_mailbox         String  可以为空          原始邮箱
+original_contact         String  可以为空          原始联系方式
 
 入参格式:
 {
@@ -124,4 +125,6 @@ media_title           String     可以为空        ²  文章含有媒介时�
     "media_url":"",                   #²文章含有媒介时，多个之间用’|’隔开
     "media_url_name":"",              #本地媒体url， 多个用“|”分割
     "media_title":"",                 #²  文章含有媒介时，多个之间用’|’隔开。比如：头像|banner|位置图集1|…|位置图集60|发帖图集1|…|发帖图集20|评论图1
+    "original_mailbox"      #原始邮箱
+    "original_contact"      #原始联系方式
 }

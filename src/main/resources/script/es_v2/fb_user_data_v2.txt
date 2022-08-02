@@ -84,7 +84,8 @@ user_birthday            String  可以为空          用户生日（部分有�
 user_classify            String  可以为空          用户分类（示例：["政府机构"]）
 user_description         String  可以为空          用户描述（部分有值，示例见备注）
 photo_album_collect      String  可以为空          相册信息
-
+original_mailbox         String  可以为空          原始邮箱
+original_contact         String  可以为空          原始联系方式
 
 入参格式:
 {
@@ -171,4 +172,6 @@ photo_album_collect      String  可以为空          相册信息
     "user_classify":"",        #用户分类（示例：["政府机构"]）
     "user_description":"",     #用户描述（部分有值，示例见备注）
     "photo_album_collect":"",  #相册信息
+    "original_mailbox"         #原始邮箱
+    "original_contact"         #原始联系方式
 }

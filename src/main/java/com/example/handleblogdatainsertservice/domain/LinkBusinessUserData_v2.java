@@ -66,7 +66,8 @@ import org.springframework.data.elasticsearch.annotations.Document;
  * media_url             String     可以为空        ²文章含有媒介时，多个之间用’|’隔开。
  * media_url_name        String     可以为空        本地媒体url， 多个用“|”分割
  * media_title           String     可以为空        ²  文章含有媒介时，多个之间用’|’隔开。比如：头像|banner|位置图集1|…|位置图集60|发帖图集1|…|发帖图集20|评论图1
- *
+ * original_mailbox         String  可以为空          原始邮箱
+ * original_contact         String  可以为空          原始联系方式
  *
  * 入参格式:
  * {
@@ -130,6 +131,8 @@ import org.springframework.data.elasticsearch.annotations.Document;
  *     "media_url":"",                   #²文章含有媒介时，多个之间用’|’隔开
  *     "media_url_name":"",              #本地媒体url， 多个用“|”分割
  *     "media_title":"",                 #²  文章含有媒介时，多个之间用’|’隔开。比如：头像|banner|位置图集1|…|位置图集60|发帖图集1|…|发帖图集20|评论图1
+ *     "original_mailbox"      #原始邮箱
+ *     "original_contact"      #原始联系方式
  * }
  */
 @Data
@@ -452,9 +455,19 @@ public class LinkBusinessUserData_v2 {
     //  @Field(type = FieldType.Text, analyzer = "ik_max_word", searchAnalyzer = "ik_max_word")
     private Integer integrity;
 
+    /**
+     * 原始邮箱
+     */
+    private String original_mailbox;
+
+    /**
+     * 原始联系方式
+     */
+    private String original_contact;
+
     public LinkBusinessUserData_v2() {}
 
-    public LinkBusinessUserData_v2(String uuid, String platform, String data_source, String create_time, String importance, String remark, String language_type, String source_id, String user_id, String screen_name, String use_name, String user_url, String user_avatar, String local_photo_url, String gender, String country, String city, String user_type, String verified, String followers_count, String friend_count, String post_count, String like_count, String source_create_time, String mobile, String email, String name_userd_before, String language, String user_religion, String works, String location, String marriage, String home_town, String user_summary, String cover, String local_cover, String staffing_company, String industries, String specialities, String headquarter_post, String headquarter_address, String confirmed_locations_contry, String confirmed_locations_city, String confirmed_locations_post, String confirmed_locations_address, String size, String founded_on, String website, String employees, String keywords, String tags, String timestamp, String source, String source_connection, String person, String media_type_embeded, String media_url, String media_url_name, String media_title, Integer integrity) {
+    public LinkBusinessUserData_v2(String uuid, String platform, String data_source, String create_time, String importance, String remark, String language_type, String source_id, String user_id, String screen_name, String use_name, String user_url, String user_avatar, String local_photo_url, String gender, String country, String city, String user_type, String verified, String followers_count, String friend_count, String post_count, String like_count, String source_create_time, String mobile, String email, String name_userd_before, String language, String user_religion, String works, String location, String marriage, String home_town, String user_summary, String cover, String local_cover, String staffing_company, String industries, String specialities, String headquarter_post, String headquarter_address, String confirmed_locations_contry, String confirmed_locations_city, String confirmed_locations_post, String confirmed_locations_address, String size, String founded_on, String website, String employees, String keywords, String tags, String timestamp, String source, String source_connection, String person, String media_type_embeded, String media_url, String media_url_name, String media_title, Integer integrity, String original_mailbox, String original_contact) {
         this.uuid = uuid;
         this.platform = platform;
         this.data_source = data_source;
@@ -515,6 +528,8 @@ public class LinkBusinessUserData_v2 {
         this.media_url_name = media_url_name;
         this.media_title = media_title;
         this.integrity = integrity;
+        this.original_mailbox = original_mailbox;
+        this.original_contact = original_contact;
     }
 }
 

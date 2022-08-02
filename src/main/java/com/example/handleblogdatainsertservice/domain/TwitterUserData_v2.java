@@ -53,6 +53,8 @@ import org.springframework.data.elasticsearch.annotations.Document;
  * com_from       String     可以为空       来源（样例数据都是 other）
  * diff_time      String     可以为空        注册日期(示例：2019-07-30 09:39:26.000000 +08:00)
  * extend         String     可以为空        扩展信息（无属性留空）
+ * original_mailbox         String  可以为空          原始邮箱
+ * original_contact         String  可以为空          原始联系方式
  *
  *
  * 入参格式:
@@ -104,6 +106,8 @@ import org.springframework.data.elasticsearch.annotations.Document;
  *     "com_from:"",             #来源（样例数据都是 other）  ->   com_from或者source_tag
  *     "diff_time":"",           #注册日期(示例：2019-07-30 09:39:26.000000 +08:00)
  *     "extend":""               #扩展信息（无属性留空）
+ *     "original_mailbox"      #原始邮箱
+ *     "original_contact"      #原始联系方式
  * }
  */
 
@@ -363,9 +367,19 @@ public class TwitterUserData_v2{
 //    @Field(type = FieldType.Text, analyzer = "ik_max_word", searchAnalyzer = "ik_max_word")
     private Integer integrity;
 
+    /**
+     * 原始邮箱
+     */
+    private String original_mailbox;
+
+    /**
+     * 原始联系方式
+     */
+    private String original_contact;
+
     public TwitterUserData_v2() {}
 
-    public TwitterUserData_v2(String uuid, String platform, String data_source, String create_time, String importance, String remark, String language_type, String source_id, String user_id, String screen_name, String use_name, String user_url, String user_avatar, String local_photo_url, String gender, String country, String city, String user_type, String verified, String followers_count, String friend_count, String post_count, String like_count, String source_create_time, String mobile, String user_religion, String works, String location, String marriage, String home_town, String email, String name_userd_before, String user_summary, String language, String user_web_url, String born_time, String registered_time, String bkgd_url, String listed, String moments, String protect_ed, String tf_effective, String time_zone, String com_from, String diff_time, String extend, Integer integrity) {
+    public TwitterUserData_v2(String uuid, String platform, String data_source, String create_time, String importance, String remark, String language_type, String source_id, String user_id, String screen_name, String use_name, String user_url, String user_avatar, String local_photo_url, String gender, String country, String city, String user_type, String verified, String followers_count, String friend_count, String post_count, String like_count, String source_create_time, String mobile, String user_religion, String works, String location, String marriage, String home_town, String email, String name_userd_before, String user_summary, String language, String user_web_url, String born_time, String registered_time, String bkgd_url, String listed, String moments, String protect_ed, String tf_effective, String time_zone, String com_from, String diff_time, String extend, Integer integrity, String original_mailbox, String original_contact) {
         this.uuid = uuid;
         this.platform = platform;
         this.data_source = data_source;
@@ -413,6 +427,8 @@ public class TwitterUserData_v2{
         this.diff_time = diff_time;
         this.extend = extend;
         this.integrity = integrity;
+        this.original_mailbox = original_mailbox;
+        this.original_contact = original_contact;
     }
 }
 

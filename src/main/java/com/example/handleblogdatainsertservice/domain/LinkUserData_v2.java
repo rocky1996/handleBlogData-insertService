@@ -133,6 +133,8 @@ import org.springframework.data.elasticsearch.annotations.FieldType;
  * media_url                String  可以为空          ²文章含有媒介时，多个之间用’|’隔开
  * media_url_name           String  可以为空          本地媒体url， 多个用“|”分割
  * media_title              String  可以为空          ²  文章含有媒介时，多个之间用’|’隔开。比如：头像|banner|位置图集1|…|位置图集60|发帖图集1|…|发帖图集20|评论图1
+ * original_mailbox         String  可以为空          原始邮箱
+ * original_contact         String  可以为空          原始联系方式
  *
  *
  * 入参格式:
@@ -260,6 +262,8 @@ import org.springframework.data.elasticsearch.annotations.FieldType;
  *     "media_url":"",                        #²文章含有媒介时，多个之间用’|’隔开
  *     "media_url_name":"",                   #本地媒体url， 多个用“|”分割
  *     "media_title":"",                      #²  文章含有媒介时，多个之间用’|’隔开。比如：头像|banner|位置图集1|…|位置图集60|发帖图集1|…|发帖图集20|评论图1
+ *     "original_mailbox"      #原始邮箱
+ *     "original_contact"      #原始联系方式
  * }
  */
 @Data
@@ -898,9 +902,19 @@ public class LinkUserData_v2 {
 //    @Field(type = FieldType.Text, analyzer = "ik_max_word", searchAnalyzer = "ik_max_word")
     private Integer integrity;
 
+    /**
+     * 原始邮箱
+     */
+    private String original_mailbox;
+
+    /**
+     * 原始联系方式
+     */
+    private String original_contact;
+
     public LinkUserData_v2() {}
 
-    public LinkUserData_v2(String uuid, String platform, String data_source, String create_time, String importance, String remark, String language_type, String source_id, String user_id, String screen_name, String use_name, String user_url, String user_avatar, String local_photo_url, String gender, String country, String city, String user_type, String verified, String followers_count, String friend_count, String post_count, String like_count, String source_create_time, String mobile, String email, String name_userd_before, String language, String user_religion, String works, String location, String marriage, String home_town, String user_summary, String impl_or_history_type, String last_name, String first_name, String birth_date_date, String cover, String local_cover, String description_job_title, String description_school_id, String description_school_name, String description_school_logo, String description_school_local_logo, String description_company_id, String description_company_name, String description_company_logo, String description_company_local_logo, String description_location, String industry_name, String summary, String experiences_job_title, String experiences_company_id, String experiences_company_name, String experiences_company_logo, String experiences_company_local_logo, String experiences_company_location, String experiences_time_period_time, String experiences_description, String certifications_name, String certifications_authority, String certifications_license, String certifications_time_period_time, String cerfitications_url, String volunteer_experiences_role, String volunteer_experiences_company_name, String volunteer_experiences_cause, String volunteer_experiences_time_period_time, String volunteer_experiences_description, String educations_school_id, String educations_school_name, String educations_school_logo, String educations_school_local_logo, String educations_diplomaqq, String educations_subjects, String educations_grade, String educations_activity, String educations_time_period_time, String educations_description, String skills_name, String skills_endorsement_count, String languages_name, String languages_proficiency, String honors_title, String honors_issuer, String honors_time, String honors_description, String organizations_name, String organizations_time_period_time, String organizations_description, String organizations_location, String patents_title, String patents_serial_no, String patents_issuer_country_name, String patents_time, String patents_issuer, String patents_url, String patents_description, String projects_name, String projects_url, String projects_time_period_time, String projects_description, String publications_title, String publications_issuer, String publications_url, String publications_time, String contacts_title, String contacts_name, String contacts_url, String tags, String profile_score, String coureses_name, String coureses_number, String tests_description, String tests_name, String tests_score, String tests_time_period, String person, String media_type_embeded, String media_url, String media_url_name, String media_title, Integer integrity) {
+    public LinkUserData_v2(String uuid, String platform, String data_source, String create_time, String importance, String remark, String language_type, String source_id, String user_id, String screen_name, String use_name, String user_url, String user_avatar, String local_photo_url, String gender, String country, String city, String user_type, String verified, String followers_count, String friend_count, String post_count, String like_count, String source_create_time, String mobile, String email, String name_userd_before, String language, String user_religion, String works, String location, String marriage, String home_town, String user_summary, String impl_or_history_type, String last_name, String first_name, String birth_date_date, String cover, String local_cover, String description_job_title, String description_school_id, String description_school_name, String description_school_logo, String description_school_local_logo, String description_company_id, String description_company_name, String description_company_logo, String description_company_local_logo, String description_location, String industry_name, String summary, String experiences_job_title, String experiences_company_id, String experiences_company_name, String experiences_company_logo, String experiences_company_local_logo, String experiences_company_location, String experiences_time_period_time, String experiences_description, String certifications_name, String certifications_authority, String certifications_license, String certifications_time_period_time, String cerfitications_url, String volunteer_experiences_role, String volunteer_experiences_company_name, String volunteer_experiences_cause, String volunteer_experiences_time_period_time, String volunteer_experiences_description, String educations_school_id, String educations_school_name, String educations_school_logo, String educations_school_local_logo, String educations_diplomaqq, String educations_subjects, String educations_grade, String educations_activity, String educations_time_period_time, String educations_description, String skills_name, String skills_endorsement_count, String languages_name, String languages_proficiency, String honors_title, String honors_issuer, String honors_time, String honors_description, String organizations_name, String organizations_time_period_time, String organizations_description, String organizations_location, String patents_title, String patents_serial_no, String patents_issuer_country_name, String patents_time, String patents_issuer, String patents_url, String patents_description, String projects_name, String projects_url, String projects_time_period_time, String projects_description, String publications_title, String publications_issuer, String publications_url, String publications_time, String contacts_title, String contacts_name, String contacts_url, String tags, String profile_score, String coureses_name, String coureses_number, String tests_description, String tests_name, String tests_score, String tests_time_period, String person, String media_type_embeded, String media_url, String media_url_name, String media_title, Integer integrity, String original_mailbox, String original_contact) {
         this.uuid = uuid;
         this.platform = platform;
         this.data_source = data_source;
@@ -1025,5 +1039,7 @@ public class LinkUserData_v2 {
         this.media_url_name = media_url_name;
         this.media_title = media_title;
         this.integrity = integrity;
+        this.original_mailbox = original_mailbox;
+        this.original_contact = original_contact;
     }
 }
