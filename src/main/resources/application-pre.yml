@@ -24,7 +24,7 @@ spring:
 
   elasticsearch:
     rest:
-      uris: 20.10.0.5:9200
+      uris: 20.10.0.5:9200,20.10.0.2:9200,20.10.0.6:9200
 
 logging:
   level:
