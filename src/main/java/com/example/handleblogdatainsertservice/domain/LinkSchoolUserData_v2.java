@@ -138,7 +138,7 @@ import org.springframework.data.elasticsearch.annotations.Document;
  */
 @Data
 @Builder
-@Document(indexName = "link_school_v2")
+@Document(indexName = "link_school_v3")
 public class LinkSchoolUserData_v2 {
 
     /**
