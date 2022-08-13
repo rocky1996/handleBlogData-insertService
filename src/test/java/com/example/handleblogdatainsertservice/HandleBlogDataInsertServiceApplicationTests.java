@@ -27,7 +27,7 @@ class HandleBlogDataInsertServiceApplicationTests {
 
     @Test
     public void deleteUserIndex() {
-        IndexCoordinates indexCoordinates = IndexCoordinates.of("fb_v2");
+        IndexCoordinates indexCoordinates = IndexCoordinates.of("link_school_v2");
         indexCoordinates.getIndexNames();
         elasticsearchRestTemplate.indexOps(indexCoordinates).delete();
     }
