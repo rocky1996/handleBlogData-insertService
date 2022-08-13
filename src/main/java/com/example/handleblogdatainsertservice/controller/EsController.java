@@ -53,4 +53,128 @@ public class EsController {
             return new RestResult<>(RestEnum.FAILED.getCode(), e.getMessage(), null);
         }
     }
+
+    @PostMapping("/uploadTwitter")
+    public RestResult uploadTwitter(HttpServletRequest httpServletRequest,
+                             @RequestParam("file") MultipartFile file,
+                             Integer mediaSourceCode,
+                             String preGovernanceNum) {
+        try {
+            if (file == null) {
+                return new RestResult<>(RestEnum.FIELD_NOT_SUPPORT_DIM_SEARCH, "文件不能为空！！！");
+            }
+
+            MediaSourceEnum mediaSourceEnum = MediaSourceEnum.getMediaSourceEnum(mediaSourceCode);
+            if (mediaSourceEnum == null) {
+                return new RestResult<>(RestEnum.MEDIA_SOURCE_ERROR);
+            }
+
+            if (!NumberUtils.isNumber(preGovernanceNum)) {
+                return new RestResult<>(RestEnum.FIELD_NOT_SUPPORT_DIM_SEARCH, "治理前数字格式不正确！！！");
+            }
+
+            boolean isOk = esService.insertEsDataTwitter(file, mediaSourceEnum, preGovernanceNum);
+            if (isOk) {
+                return new RestResult<>(RestEnum.SUCCESS);
+            }else {
+                return new RestResult<>(RestEnum.FAILED);
+            }
+        } catch (Exception e) {
+            log.error("EsController.upload has error:{}",e.getMessage());
+            return new RestResult<>(RestEnum.FAILED.getCode(), e.getMessage(), null);
+        }
+    }
+
+    @PostMapping("/uploadInstagram")
+    public RestResult uploadInstagram(HttpServletRequest httpServletRequest,
+                             @RequestParam("file") MultipartFile file,
+                             Integer mediaSourceCode,
+                             String preGovernanceNum) {
+        try {
+            if (file == null) {
+                return new RestResult<>(RestEnum.FIELD_NOT_SUPPORT_DIM_SEARCH, "文件不能为空！！！");
+            }
+
+            MediaSourceEnum mediaSourceEnum = MediaSourceEnum.getMediaSourceEnum(mediaSourceCode);
+            if (mediaSourceEnum == null) {
+                return new RestResult<>(RestEnum.MEDIA_SOURCE_ERROR);
+            }
+
+            if (!NumberUtils.isNumber(preGovernanceNum)) {
+                return new RestResult<>(RestEnum.FIELD_NOT_SUPPORT_DIM_SEARCH, "治理前数字格式不正确！！！");
+            }
+
+            boolean isOk = esService.insertEsDataInstagram(file, mediaSourceEnum, preGovernanceNum);
+            if (isOk) {
+                return new RestResult<>(RestEnum.SUCCESS);
+            }else {
+                return new RestResult<>(RestEnum.FAILED);
+            }
+        } catch (Exception e) {
+            log.error("EsController.upload has error:{}",e.getMessage());
+            return new RestResult<>(RestEnum.FAILED.getCode(), e.getMessage(), null);
+        }
+    }
+
+    @PostMapping("/uploadLinkBusiness")
+    public RestResult uploadLinkBusiness(HttpServletRequest httpServletRequest,
+                                       @RequestParam("file") MultipartFile file,
+                                       Integer mediaSourceCode,
+                                       String preGovernanceNum) {
+        try {
+            if (file == null) {
+                return new RestResult<>(RestEnum.FIELD_NOT_SUPPORT_DIM_SEARCH, "文件不能为空！！！");
+            }
+
+            MediaSourceEnum mediaSourceEnum = MediaSourceEnum.getMediaSourceEnum(mediaSourceCode);
+            if (mediaSourceEnum == null) {
+                return new RestResult<>(RestEnum.MEDIA_SOURCE_ERROR);
+            }
+
+            if (!NumberUtils.isNumber(preGovernanceNum)) {
+                return new RestResult<>(RestEnum.FIELD_NOT_SUPPORT_DIM_SEARCH, "治理前数字格式不正确！！！");
+            }
+
+            boolean isOk = esService.insertEsDataLinkBusiness(file, mediaSourceEnum, preGovernanceNum);
+            if (isOk) {
+                return new RestResult<>(RestEnum.SUCCESS);
+            }else {
+                return new RestResult<>(RestEnum.FAILED);
+            }
+        } catch (Exception e) {
+            log.error("EsController.upload has error:{}",e.getMessage());
+            return new RestResult<>(RestEnum.FAILED.getCode(), e.getMessage(), null);
+        }
+    }
+
+    @PostMapping("/uploadLinkSchool")
+    public RestResult uploadLinkSchool(HttpServletRequest httpServletRequest,
+                                      @RequestParam("file") MultipartFile file,
+                                      Integer mediaSourceCode,
+                                      String preGovernanceNum) {
+        try {
+            if (file == null) {
+                return new RestResult<>(RestEnum.FIELD_NOT_SUPPORT_DIM_SEARCH, "文件不能为空！！！");
+            }
+
+            MediaSourceEnum mediaSourceEnum = MediaSourceEnum.getMediaSourceEnum(mediaSourceCode);
+            if (mediaSourceEnum == null) {
+                return new RestResult<>(RestEnum.MEDIA_SOURCE_ERROR);
+            }
+
+            if (!NumberUtils.isNumber(preGovernanceNum)) {
+                return new RestResult<>(RestEnum.FIELD_NOT_SUPPORT_DIM_SEARCH, "治理前数字格式不正确！！！");
+            }
+
+            boolean isOk = esService.insertEsDataLinkSchool(file, mediaSourceEnum, preGovernanceNum);
+            if (isOk) {
+                return new RestResult<>(RestEnum.SUCCESS);
+            }else {
+                return new RestResult<>(RestEnum.FAILED);
+            }
+        } catch (Exception e) {
+            log.error("EsController.upload has error:{}",e.getMessage());
+            return new RestResult<>(RestEnum.FAILED.getCode(), e.getMessage(), null);
+        }
+    }
 }

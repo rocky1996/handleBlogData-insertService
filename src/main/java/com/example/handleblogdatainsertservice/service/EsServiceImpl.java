@@ -195,10 +195,163 @@ public class EsServiceImpl {
     }
 
     /**
-     * 统计治理前数据
-     * @param key
+     * twitter
+     * @param file
+     * @param mediaSourceEnum
      * @param preGovernanceNum
+     * @return
      */
+    public synchronized boolean insertEsDataTwitter(MultipartFile file, MediaSourceEnum mediaSourceEnum, String preGovernanceNum) {
+        try {
+            if (file == null) {
+                return false;
+            }
+
+            if (MediaSourceEnum.TWITTER != mediaSourceEnum) {
+                return false;
+            }
+
+            List<TwitterUserData_v2> twitterUserData_v2List = (List<TwitterUserData_v2>) ReaderFileUtil.readMultipartFileFileTwitter(file, MediaSourceEnum.TWITTER);
+            if (!CollectionUtils.isEmpty(twitterUserData_v2List)) {
+
+                //统计治理前数量
+                addCacheFromRedis(RedisKeyConstants.TWITTER_PRO_GOV_NUM_KEY, preGovernanceNum);
+                List<TwitterUserData_v2> dataList = (List<TwitterUserData_v2>) twitterV2Repository.saveAll(twitterUserData_v2List);
+                if (CollectionUtils.isEmpty(dataList)) {
+                    return false;
+                }
+            }
+            return true;
+        }catch (Exception e) {
+            log.error("EsServiceImpl.insertEsDataTwitter has error:{}",e.getMessage());
+        }
+        return false;
+    }
+
+
+    /**
+     * instagram
+     * @param file
+     * @param mediaSourceEnum
+     * @param preGovernanceNum
+     * @return
+     */
+    public synchronized boolean insertEsDataInstagram(MultipartFile file, MediaSourceEnum mediaSourceEnum, String preGovernanceNum) {
+        try {
+            if (file == null) {
+                return false;
+            }
+
+            if (MediaSourceEnum.INSTAGRAM != mediaSourceEnum) {
+                return false;
+            }
+
+            List<InstagramUserData_v2> instagramUserData_v2List = (List<InstagramUserData_v2>) ReaderFileUtil.readMultipartFileFileInstagram(file, MediaSourceEnum.INSTAGRAM);
+            if (!CollectionUtils.isEmpty(instagramUserData_v2List)) {
+                //统计治理前数量
+                addCacheFromRedis(RedisKeyConstants.INSTAGRAM_PRO_GOV_NUM_KEY, preGovernanceNum);
+                List<InstagramUserData_v2> dataList = (List<InstagramUserData_v2>) instagramV2Repository.saveAll(instagramUserData_v2List);
+                if (CollectionUtils.isEmpty(dataList)) {
+                    return false;
+                }
+            }
+            return true;
+        }catch (Exception e) {
+            log.error("EsServiceImpl.insertEsDataInstagram has error:{}",e.getMessage());
+        }
+        return false;
+    }
+
+    /**
+     * link_school
+     * @param file
+     * @param mediaSourceEnum
+     * @param preGovernanceNum
+     * @return
+     */
+    public synchronized boolean insertEsDataLinkBusiness(MultipartFile file, MediaSourceEnum mediaSourceEnum, String preGovernanceNum) {
+        try {
+            if (file == null) {
+                return false;
+            }
+
+            if (MediaSourceEnum.LINKEDIN_BUSINESS != mediaSourceEnum) {
+                return false;
+            }
+
+            List<LinkBusinessUserData_v2> linkBusinessUserData_v2List = (List<LinkBusinessUserData_v2>) ReaderFileUtil.readMultipartFileFileLinkBusiness(file, MediaSourceEnum.LINKEDIN_BUSINESS);
+            if (!CollectionUtils.isEmpty(linkBusinessUserData_v2List)) {
+
+                //统计治理前数量
+                addCacheFromRedis(RedisKeyConstants.LINK_BUSINESS_PRO_GOV_NUM_KEY, preGovernanceNum);
+                List<LinkBusinessUserData_v2> dataList = (List<LinkBusinessUserData_v2>) linkBusinessV2Repository.saveAll(linkBusinessUserData_v2List);
+                if (CollectionUtils.isEmpty(dataList)) {
+                    return false;
+                }
+            }
+            return true;
+        }catch (Exception e) {
+            log.error("EsServiceImpl.insertEsDataLinkBusiness has error:{}",e.getMessage());
+        }
+        return false;
+    }
+
+
+
+    /**
+     * link_school
+     * @param file
+     * @param mediaSourceEnum
+     * @param preGovernanceNum
+     * @return
+     */
+    public synchronized boolean insertEsDataLinkSchool(MultipartFile file, MediaSourceEnum mediaSourceEnum, String preGovernanceNum) {
+        try {
+            if (file == null) {
+                return false;
+            }
+
+            if (MediaSourceEnum.LINKEDIN_SCHOOL != mediaSourceEnum) {
+                return false;
+            }
+
+            List<LinkSchoolUserData_v2> linkSchoolUserData_v2List = (List<LinkSchoolUserData_v2>) ReaderFileUtil.readMultipartFileFileLinkSchool(file, MediaSourceEnum.LINKEDIN_SCHOOL);
+            if (!CollectionUtils.isEmpty(linkSchoolUserData_v2List)) {
+
+                //统计治理前数量
+                addCacheFromRedis(RedisKeyConstants.LINK_SCHOOL_PRO_GOV_NUM_KEY, preGovernanceNum);
+                List<LinkSchoolUserData_v2> dataList = (List<LinkSchoolUserData_v2>) linkSchoolV2Repository.saveAll(linkSchoolUserData_v2List);
+                if (CollectionUtils.isEmpty(dataList)) {
+                    return false;
+                }
+            }
+            return true;
+        }catch (Exception e) {
+            log.error("EsServiceImpl.insertEsDataLinkSchool has error:{}",e.getMessage());
+        }
+        return false;
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    /**
+         * 统计治理前数据
+         * @param key
+         * @param preGovernanceNum
+         */
     public void addCacheFromRedis(String key, String preGovernanceNum) {
         if (StringUtils.isBlank(key)) {
             return;
