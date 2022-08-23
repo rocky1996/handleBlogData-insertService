@@ -6,10 +6,7 @@ import com.example.handleblogdatainsertservice.enums.RestEnum;
 import com.example.handleblogdatainsertservice.service.EsServiceImpl;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.math.NumberUtils;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.Resource;
@@ -174,6 +171,21 @@ public class EsController {
             }
         } catch (Exception e) {
             log.error("EsController.upload has error:{}",e.getMessage());
+            return new RestResult<>(RestEnum.FAILED.getCode(), e.getMessage(), null);
+        }
+    }
+
+    @GetMapping("/updateEsInfo")
+    public RestResult updateEsInfo(Integer mediaSourceCode) {
+
+        try {
+            MediaSourceEnum mediaSourceEnum = MediaSourceEnum.getMediaSourceEnum(mediaSourceCode);
+            if (mediaSourceEnum == null) {
+                return new RestResult<>(RestEnum.MEDIA_SOURCE_ERROR);
+            }
+            return esService.updateEsInfo(mediaSourceEnum);
+        }catch (Exception e) {
+            log.error("EsController.updateEsInfo has error:{}",e.getMessage());
             return new RestResult<>(RestEnum.FAILED.getCode(), e.getMessage(), null);
         }
     }

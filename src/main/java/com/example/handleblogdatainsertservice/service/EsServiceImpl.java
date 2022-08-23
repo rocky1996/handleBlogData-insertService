@@ -2,20 +2,36 @@ package com.example.handleblogdatainsertservice.service;
 
 import cn.hutool.db.DaoTemplate;
 import com.example.handleblogdatainsertservice.constants.RedisKeyConstants;
+import com.example.handleblogdatainsertservice.constants.RestResult;
 import com.example.handleblogdatainsertservice.domain.*;
 import com.example.handleblogdatainsertservice.enums.MediaSourceEnum;
+import com.example.handleblogdatainsertservice.enums.RestEnum;
 import com.example.handleblogdatainsertservice.repository.*;
+import com.example.handleblogdatainsertservice.util.DateUtils;
+import com.example.handleblogdatainsertservice.util.DingTalkUtil;
+import com.example.handleblogdatainsertservice.util.JacksonUtil;
 import com.example.handleblogdatainsertservice.util.ReaderFileUtil;
 import com.example.handleblogdatainsertservice.vo.SendEmailReq;
 import com.google.common.collect.Lists;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
+import org.elasticsearch.action.search.SearchRequest;
+import org.elasticsearch.action.search.SearchResponse;
+import org.elasticsearch.action.update.UpdateRequest;
+import org.elasticsearch.client.HttpAsyncResponseConsumerFactory;
+import org.elasticsearch.client.RequestOptions;
+import org.elasticsearch.client.RestHighLevelClient;
+import org.elasticsearch.index.query.BoolQueryBuilder;
+import org.elasticsearch.index.query.QueryBuilders;
+import org.elasticsearch.search.SearchHit;
+import org.elasticsearch.search.builder.SearchSourceBuilder;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.Resource;
-import java.util.List;
+import java.util.*;
+import java.util.stream.Collectors;
 
 @Service
 @Slf4j
@@ -39,6 +55,11 @@ public class EsServiceImpl {
     private RedisServiceImpl redisService;
     @Resource
     private SendEmailServiceImpl sendEmailService;
+    @Resource
+    private RestHighLevelClient restHighLevelClient;
+
+    private static final List<String> fieldList_taiwan = Lists.newArrayList("台湾");
+
 
     /**
      *
@@ -362,5 +383,71 @@ public class EsServiceImpl {
             return;
         }
         redisService.set(key, preGovernanceNum, null, null, false);
+    }
+
+
+
+    public RestResult updateEsInfo(MediaSourceEnum mediaSourceEnum) {
+        try {
+            BoolQueryBuilder bigBuilder = QueryBuilders.boolQuery();
+            BoolQueryBuilder channelQueryBuilder = new BoolQueryBuilder();
+            for(String fieldValue: fieldList_taiwan){
+                channelQueryBuilder.should(QueryBuilders.matchQuery("country", fieldValue));
+            }
+            bigBuilder.must(channelQueryBuilder);
+            SearchSourceBuilder builder = new SearchSourceBuilder()
+                    .query(bigBuilder)
+                    .trackTotalHits(true);
+
+            //搜索
+            SearchRequest searchRequest = new SearchRequest();
+            searchRequest.indices(mediaSourceEnum.getEs_index_v2());
+            searchRequest.types("_doc");
+            searchRequest.source(builder);
+            SearchResponse response = restHighLevelClient.search(searchRequest, toBuilder());
+            if (response == null) {
+                return new RestResult<>(RestEnum.PLEASE_TRY);
+            }
+
+            SearchHit[] searchHits = response.getHits().getHits();
+            if (CollectionUtils.isEmpty(Arrays.stream(searchHits).collect(Collectors.toList()))) {
+                return new RestResult<>(RestEnum.PLEASE_TRY);
+            }
+
+            for (SearchHit documentFields : Arrays.stream(searchHits).collect(Collectors.toList())) {
+                Map map = new HashMap();
+                map.put("country", "中国台湾");
+                UpdateRequest updateRequest = new UpdateRequest(mediaSourceEnum.getEs_index_v2(), documentFields.getId()).doc(map);
+                restHighLevelClient.update(updateRequest, toBuilder());
+            }
+
+            DingTalkUtil.sendDdMessage(mediaSourceEnum.getEs_index_v2() + "索引数据已经刷完,请查看！！！");
+            return new RestResult<>(RestEnum.SUCCESS);
+        }catch (Exception e) {
+            log.error("EsServiceImpl2.updateEsInfo has error,",e);
+            DingTalkUtil.sendDdMessage(assemblingStr(e, "刷" + mediaSourceEnum.getEs_index_v2() + "索引的脚本接口", ""));
+        }
+        return new RestResult<>(RestEnum.FAILED.getCode(), "刷脚本失败");
+    }
+
+    /**
+     * 组装
+     * @param e
+     * @p interFaceName
+     * @param object
+     * @return
+     */
+    private String assemblingStr(Exception e, String interFaceName, Object object) {
+        return "落河系统报错通知: 当前时间" + DateUtils.dateToStr(new Date()) + interFaceName + "报错,报错信息: " + JacksonUtil.beanToStr(e) + ", 入参为: " + JacksonUtil.beanToStr(object);
+    }
+
+    /**
+     * 自定义build
+     * @return
+     */
+    private RequestOptions toBuilder() {
+        RequestOptions.Builder builder = RequestOptions.DEFAULT.toBuilder();
+        builder.setHttpAsyncResponseConsumerFactory(new HttpAsyncResponseConsumerFactory.HeapBufferedResponseConsumerFactory(1024 * 1024 * 1024));
+        return builder.build();
     }
 }

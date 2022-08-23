@@ -10,6 +10,8 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.stereotype.Component;
 
+import java.util.concurrent.TimeUnit;
+
 @Configuration
 @Component
 public class EsConfig {
@@ -50,10 +52,13 @@ public class EsConfig {
                     @Override
                     public RequestConfig.Builder customizeRequestConfig(
                             RequestConfig.Builder requestConfigBuilder) {
-                        return requestConfigBuilder.setConnectTimeout(300000) // 连接超时（默认为1秒）
+                        return requestConfigBuilder
+                                .setConnectTimeout(300000)
                                 .setSocketTimeout(400000)
-                                .setConnectionRequestTimeout(0);// 套接字超时（默认为30秒）//更改客户端的超时限制默认30秒现在改为100*1000分钟
+                                .setConnectionRequestTimeout(10000);
                     }
-                }));
+                })
+                .setHttpClientConfigCallback(requestConfig -> requestConfig.setKeepAliveStrategy(
+                        (response, context) -> TimeUnit.MINUTES.toMillis(1))));
     }
 }
