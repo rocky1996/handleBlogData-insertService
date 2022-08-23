@@ -392,7 +392,7 @@ public class EsServiceImpl {
             BoolQueryBuilder bigBuilder = QueryBuilders.boolQuery();
             BoolQueryBuilder channelQueryBuilder = new BoolQueryBuilder();
             for(String fieldValue: fieldList_taiwan){
-                channelQueryBuilder.should(QueryBuilders.matchQuery("country", fieldValue));
+                channelQueryBuilder.should(QueryBuilders.matchQuery("country.keyword", fieldValue));
             }
             bigBuilder.must(channelQueryBuilder);
             SearchSourceBuilder builder = new SearchSourceBuilder()
@@ -412,6 +412,12 @@ public class EsServiceImpl {
             SearchHit[] searchHits = response.getHits().getHits();
             if (CollectionUtils.isEmpty(Arrays.stream(searchHits).collect(Collectors.toList()))) {
                 return new RestResult<>(RestEnum.PLEASE_TRY);
+            }
+
+            DingTalkUtil.sendDdMessage(String.valueOf(response.getHits().getTotalHits().value));
+            if (CollectionUtils.isEmpty(Arrays.stream(searchHits).collect(Collectors.toList()))) {
+                DingTalkUtil.sendDdMessage("searchHits is null");
+                return new RestResult<>(RestEnum.SUCCESS);
             }
 
             for (SearchHit documentFields : Arrays.stream(searchHits).collect(Collectors.toList())) {

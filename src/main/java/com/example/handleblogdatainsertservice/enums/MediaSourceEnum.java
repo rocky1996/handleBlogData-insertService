@@ -5,16 +5,16 @@ import java.util.Map;
 
 public enum MediaSourceEnum {
 
-    TWITTER(0, "Twitter", "twitter", "twitter_v2"),
-    FB_IMPL(1, "FaceBook-完整属性",  "fb_impl", "fb_v2"),
-    FB_HISTORY(2, "FaceBook-部分属性", "fb_history", "fb_v2"),
+    TWITTER(0, "Twitter", "twitter", "twitter_v4"),
+    FB_IMPL(1, "FaceBook-完整属性",  "fb_impl", "fb_v4"),
+    FB_HISTORY(2, "FaceBook-部分属性", "fb_history", "fb_v4"),
     FQ_IMPL(3, "Foursquare-完整属性", "fq_impl", "fq_v2"),
     FQ_HISTORY(4, "Foursquare-部分属性", "fq_history", "fq_v2"),
-    INSTAGRAM(5, "Instagram", "instagram", "instagram_v2"),
+    INSTAGRAM(5, "Instagram", "instagram", "instagram_v4"),
     LINKEDIN_IMPL(6, "LinkedIn-完整属性", "link_impl", "link_v2"),
     LINKEDIN_HISTORY(7, "LinkedIn-部分属性", "link_history", "link_v2"),
-    LINKEDIN_BUSINESS(8, "LinkedIn-企业", "link_business", "link_business_v2"),
-    LINKEDIN_SCHOOL(9, "LinkedIn-学校", "link_school", "link_school_v2"),
+    LINKEDIN_BUSINESS(8, "LinkedIn-企业", "link_business", "link_business_v4"),
+    LINKEDIN_SCHOOL(9, "LinkedIn-学校", "link_school", "link_school_v4"),
     ALL(10, "全部", "all", "all"),
     ;
 
