@@ -268,7 +268,7 @@ import org.springframework.data.elasticsearch.annotations.FieldType;
  */
 @Data
 @Builder
-@Document(indexName = "link_v4")
+@Document(indexName = "link_v2")
 public class LinkUserData_v2 {
 
     /**
